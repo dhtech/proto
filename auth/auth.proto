@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthenticationService {
+  rpc RequestCredential (NewCredentialRequest) returns (stream NewCredentialResponse) {}
+}
+
+message SshCertificateRequest {
+  string public_key = 1;
+}
+
+message SshCertificate {
+  string certificate = 1;
+}
+
+message NewCredentialRequest {
+  // Request for a short-lived SSH certificate
+  SshCertificateRequest ssh_certificate_request = 1;
+}
+
+message UserAction {
+  // Interactive URL needs to be visited and acted on
+  string url = 1;
+}
+
+message NewCredentialResponse {
+  // If set, the user needs to do something
+  UserAction required_action = 1;
+
+  SshCertificate ssh_certificate = 2;
+}
