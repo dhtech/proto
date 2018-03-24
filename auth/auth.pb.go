@@ -6,13 +6,15 @@ Package auth is a generated protocol buffer package.
 
 It is generated from these files:
 	auth.proto
+	internal.proto
 
 It has these top-level messages:
 	SshCertificateRequest
 	SshCertificate
-	NewCredentialRequest
+	UserCredentialRequest
 	UserAction
-	NewCredentialResponse
+	CredentialResponse
+	WebChallengeResponse
 */
 package auth
 
@@ -68,17 +70,17 @@ func (m *SshCertificate) GetCertificate() string {
 	return ""
 }
 
-type NewCredentialRequest struct {
+type UserCredentialRequest struct {
 	// Request for a short-lived SSH certificate
 	SshCertificateRequest *SshCertificateRequest `protobuf:"bytes,1,opt,name=ssh_certificate_request,json=sshCertificateRequest" json:"ssh_certificate_request,omitempty"`
 }
 
-func (m *NewCredentialRequest) Reset()                    { *m = NewCredentialRequest{} }
-func (m *NewCredentialRequest) String() string            { return proto.CompactTextString(m) }
-func (*NewCredentialRequest) ProtoMessage()               {}
-func (*NewCredentialRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (m *UserCredentialRequest) Reset()                    { *m = UserCredentialRequest{} }
+func (m *UserCredentialRequest) String() string            { return proto.CompactTextString(m) }
+func (*UserCredentialRequest) ProtoMessage()               {}
+func (*UserCredentialRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
-func (m *NewCredentialRequest) GetSshCertificateRequest() *SshCertificateRequest {
+func (m *UserCredentialRequest) GetSshCertificateRequest() *SshCertificateRequest {
 	if m != nil {
 		return m.SshCertificateRequest
 	}
@@ -102,25 +104,25 @@ func (m *UserAction) GetUrl() string {
 	return ""
 }
 
-type NewCredentialResponse struct {
+type CredentialResponse struct {
 	// If set, the user needs to do something
-	ActionRequired *UserAction     `protobuf:"bytes,1,opt,name=action_required,json=actionRequired" json:"action_required,omitempty"`
+	RequiredAction *UserAction     `protobuf:"bytes,1,opt,name=required_action,json=requiredAction" json:"required_action,omitempty"`
 	SshCertificate *SshCertificate `protobuf:"bytes,2,opt,name=ssh_certificate,json=sshCertificate" json:"ssh_certificate,omitempty"`
 }
 
-func (m *NewCredentialResponse) Reset()                    { *m = NewCredentialResponse{} }
-func (m *NewCredentialResponse) String() string            { return proto.CompactTextString(m) }
-func (*NewCredentialResponse) ProtoMessage()               {}
-func (*NewCredentialResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (m *CredentialResponse) Reset()                    { *m = CredentialResponse{} }
+func (m *CredentialResponse) String() string            { return proto.CompactTextString(m) }
+func (*CredentialResponse) ProtoMessage()               {}
+func (*CredentialResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
-func (m *NewCredentialResponse) GetActionRequired() *UserAction {
+func (m *CredentialResponse) GetRequiredAction() *UserAction {
 	if m != nil {
-		return m.ActionRequired
+		return m.RequiredAction
 	}
 	return nil
 }
 
-func (m *NewCredentialResponse) GetSshCertificate() *SshCertificate {
+func (m *CredentialResponse) GetSshCertificate() *SshCertificate {
 	if m != nil {
 		return m.SshCertificate
 	}
@@ -130,9 +132,9 @@ func (m *NewCredentialResponse) GetSshCertificate() *SshCertificate {
 func init() {
 	proto.RegisterType((*SshCertificateRequest)(nil), "auth.SshCertificateRequest")
 	proto.RegisterType((*SshCertificate)(nil), "auth.SshCertificate")
-	proto.RegisterType((*NewCredentialRequest)(nil), "auth.NewCredentialRequest")
+	proto.RegisterType((*UserCredentialRequest)(nil), "auth.UserCredentialRequest")
 	proto.RegisterType((*UserAction)(nil), "auth.UserAction")
-	proto.RegisterType((*NewCredentialResponse)(nil), "auth.NewCredentialResponse")
+	proto.RegisterType((*CredentialResponse)(nil), "auth.CredentialResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -146,7 +148,7 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for AuthenticationService service
 
 type AuthenticationServiceClient interface {
-	RequestCredential(ctx context.Context, in *NewCredentialRequest, opts ...grpc.CallOption) (AuthenticationService_RequestCredentialClient, error)
+	RequestUserCredential(ctx context.Context, in *UserCredentialRequest, opts ...grpc.CallOption) (AuthenticationService_RequestUserCredentialClient, error)
 }
 
 type authenticationServiceClient struct {
@@ -157,12 +159,12 @@ func NewAuthenticationServiceClient(cc *grpc.ClientConn) AuthenticationServiceCl
 	return &authenticationServiceClient{cc}
 }
 
-func (c *authenticationServiceClient) RequestCredential(ctx context.Context, in *NewCredentialRequest, opts ...grpc.CallOption) (AuthenticationService_RequestCredentialClient, error) {
-	stream, err := grpc.NewClientStream(ctx, &_AuthenticationService_serviceDesc.Streams[0], c.cc, "/auth.AuthenticationService/RequestCredential", opts...)
+func (c *authenticationServiceClient) RequestUserCredential(ctx context.Context, in *UserCredentialRequest, opts ...grpc.CallOption) (AuthenticationService_RequestUserCredentialClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_AuthenticationService_serviceDesc.Streams[0], c.cc, "/auth.AuthenticationService/RequestUserCredential", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &authenticationServiceRequestCredentialClient{stream}
+	x := &authenticationServiceRequestUserCredentialClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -172,17 +174,17 @@ func (c *authenticationServiceClient) RequestCredential(ctx context.Context, in 
 	return x, nil
 }
 
-type AuthenticationService_RequestCredentialClient interface {
-	Recv() (*NewCredentialResponse, error)
+type AuthenticationService_RequestUserCredentialClient interface {
+	Recv() (*CredentialResponse, error)
 	grpc.ClientStream
 }
 
-type authenticationServiceRequestCredentialClient struct {
+type authenticationServiceRequestUserCredentialClient struct {
 	grpc.ClientStream
 }
 
-func (x *authenticationServiceRequestCredentialClient) Recv() (*NewCredentialResponse, error) {
-	m := new(NewCredentialResponse)
+func (x *authenticationServiceRequestUserCredentialClient) Recv() (*CredentialResponse, error) {
+	m := new(CredentialResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -192,31 +194,31 @@ func (x *authenticationServiceRequestCredentialClient) Recv() (*NewCredentialRes
 // Server API for AuthenticationService service
 
 type AuthenticationServiceServer interface {
-	RequestCredential(*NewCredentialRequest, AuthenticationService_RequestCredentialServer) error
+	RequestUserCredential(*UserCredentialRequest, AuthenticationService_RequestUserCredentialServer) error
 }
 
 func RegisterAuthenticationServiceServer(s *grpc.Server, srv AuthenticationServiceServer) {
 	s.RegisterService(&_AuthenticationService_serviceDesc, srv)
 }
 
-func _AuthenticationService_RequestCredential_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(NewCredentialRequest)
+func _AuthenticationService_RequestUserCredential_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(UserCredentialRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AuthenticationServiceServer).RequestCredential(m, &authenticationServiceRequestCredentialServer{stream})
+	return srv.(AuthenticationServiceServer).RequestUserCredential(m, &authenticationServiceRequestUserCredentialServer{stream})
 }
 
-type AuthenticationService_RequestCredentialServer interface {
-	Send(*NewCredentialResponse) error
+type AuthenticationService_RequestUserCredentialServer interface {
+	Send(*CredentialResponse) error
 	grpc.ServerStream
 }
 
-type authenticationServiceRequestCredentialServer struct {
+type authenticationServiceRequestUserCredentialServer struct {
 	grpc.ServerStream
 }
 
-func (x *authenticationServiceRequestCredentialServer) Send(m *NewCredentialResponse) error {
+func (x *authenticationServiceRequestUserCredentialServer) Send(m *CredentialResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -226,8 +228,8 @@ var _AuthenticationService_serviceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "RequestCredential",
-			Handler:       _AuthenticationService_RequestCredential_Handler,
+			StreamName:    "RequestUserCredential",
+			Handler:       _AuthenticationService_RequestUserCredential_Handler,
 			ServerStreams: true,
 		},
 	},
@@ -237,23 +239,23 @@ var _AuthenticationService_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("auth.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 283 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0x5f, 0x4b, 0xc3, 0x30,
-	0x14, 0xc5, 0xad, 0x8a, 0xb0, 0x3b, 0xe8, 0x66, 0x58, 0x71, 0x6c, 0x28, 0x23, 0x4f, 0x3e, 0x0d,
-	0xa9, 0x20, 0xf8, 0xe0, 0xc3, 0xd8, 0xa3, 0x20, 0xd2, 0xe2, 0x73, 0xc9, 0xb2, 0x2b, 0x0d, 0x2b,
-	0x6d, 0xcd, 0x1f, 0x65, 0x1f, 0xc3, 0x6f, 0x2c, 0x4d, 0x22, 0xdd, 0x46, 0xde, 0x6e, 0xee, 0xbd,
-	0xe7, 0xe4, 0x77, 0x42, 0x00, 0x98, 0xd1, 0xe5, 0xb2, 0x95, 0x8d, 0x6e, 0xc8, 0x65, 0x57, 0xd3,
-	0x27, 0x48, 0x72, 0x55, 0xae, 0x51, 0x6a, 0xf1, 0x29, 0x38, 0xd3, 0x98, 0xe1, 0x97, 0x41, 0xa5,
-	0xc9, 0x2d, 0x40, 0x6b, 0x36, 0x95, 0xe0, 0xc5, 0x0e, 0xf7, 0xd3, 0x68, 0x11, 0xdd, 0x0f, 0xb2,
-	0x81, 0xeb, 0xbc, 0xe2, 0x9e, 0xa6, 0x10, 0x1f, 0xeb, 0xc8, 0x02, 0x86, 0xbc, 0x3f, 0x7a, 0xc5,
-	0x61, 0x8b, 0xee, 0x60, 0xf2, 0x86, 0x3f, 0x6b, 0x89, 0x5b, 0xac, 0xb5, 0x60, 0xd5, 0xff, 0x55,
-	0x39, 0xdc, 0x28, 0x55, 0x16, 0x07, 0xab, 0x85, 0x74, 0x23, 0xeb, 0x32, 0x4c, 0xe7, 0x4b, 0xcb,
-	0x1d, 0x04, 0xcd, 0x12, 0x15, 0x6a, 0xd3, 0x3b, 0x80, 0x0f, 0x85, 0x72, 0xc5, 0xb5, 0x68, 0x6a,
-	0x32, 0x86, 0x0b, 0x23, 0x2b, 0x0f, 0xd5, 0x95, 0xf4, 0x37, 0x82, 0xe4, 0x84, 0x46, 0xb5, 0x4d,
-	0xad, 0x90, 0x3c, 0xc3, 0x88, 0x59, 0x95, 0xa5, 0x10, 0x12, 0xb7, 0x1e, 0x63, 0xec, 0x30, 0x7a,
-	0xdb, 0x2c, 0x76, 0x8b, 0x99, 0xdf, 0x23, 0x2f, 0x30, 0x3a, 0x49, 0x32, 0x3d, 0xb7, 0xd2, 0x49,
-	0x30, 0x41, 0x7c, 0x8c, 0x9e, 0x0a, 0x48, 0x56, 0x46, 0x97, 0x1d, 0x0f, 0x67, 0x9d, 0x71, 0x8e,
-	0xf2, 0x5b, 0x70, 0x24, 0xef, 0x70, 0xed, 0x73, 0xf5, 0xbc, 0x64, 0xe6, 0x3c, 0x43, 0x4f, 0x3a,
-	0x9b, 0x07, 0x67, 0x2e, 0x20, 0x3d, 0x7b, 0x88, 0x36, 0x57, 0xf6, 0x13, 0x3c, 0xfe, 0x05, 0x00,
-	0x00, 0xff, 0xff, 0xb4, 0xdb, 0xbc, 0x22, 0x12, 0x02, 0x00, 0x00,
+	// 281 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0xcf, 0x4a, 0xc3, 0x40,
+	0x10, 0xc6, 0x8d, 0x8a, 0xd0, 0x29, 0xb4, 0x65, 0x31, 0x18, 0x2c, 0x4a, 0xd9, 0x93, 0xa7, 0x22,
+	0x11, 0x04, 0x0f, 0x1e, 0x4a, 0x8f, 0xde, 0x36, 0x78, 0x0e, 0xdb, 0xed, 0x48, 0x96, 0x86, 0x24,
+	0xee, 0x1f, 0xa1, 0x2f, 0xe1, 0x33, 0xcb, 0x6e, 0xb6, 0x24, 0xb1, 0xb9, 0xcd, 0xce, 0xcc, 0x37,
+	0xdf, 0x6f, 0x86, 0x05, 0xe0, 0xd6, 0x14, 0xeb, 0x46, 0xd5, 0xa6, 0x26, 0xd7, 0x2e, 0xa6, 0xaf,
+	0x10, 0x67, 0xba, 0xd8, 0xa2, 0x32, 0xf2, 0x4b, 0x0a, 0x6e, 0x90, 0xe1, 0xb7, 0x45, 0x6d, 0xc8,
+	0x03, 0x40, 0x63, 0x77, 0xa5, 0x14, 0xf9, 0x01, 0x8f, 0x49, 0xb4, 0x8a, 0x9e, 0x26, 0x6c, 0xd2,
+	0x66, 0x3e, 0xf0, 0x48, 0x53, 0x98, 0x0d, 0x75, 0x64, 0x05, 0x53, 0xd1, 0x3d, 0x83, 0xa2, 0x9f,
+	0xa2, 0x25, 0xc4, 0x9f, 0x1a, 0xd5, 0x56, 0xe1, 0x1e, 0x2b, 0x23, 0x79, 0x79, 0xf2, 0xca, 0xe0,
+	0x4e, 0xeb, 0x22, 0xef, 0xf5, 0xe6, 0xaa, 0x2d, 0xf9, 0x31, 0xd3, 0x74, 0xb9, 0xf6, 0xe0, 0xa3,
+	0xa4, 0x2c, 0xd6, 0x63, 0x69, 0xfa, 0x08, 0xe0, 0xdc, 0x36, 0xc2, 0xc8, 0xba, 0x22, 0x0b, 0xb8,
+	0xb2, 0xaa, 0x0c, 0x54, 0x2e, 0xa4, 0xbf, 0x11, 0x90, 0x3e, 0x8a, 0x6e, 0xea, 0x4a, 0x23, 0x79,
+	0x83, 0xb9, 0xf3, 0x96, 0x0a, 0xf7, 0x39, 0xf7, 0xda, 0xc0, 0xb0, 0x68, 0x19, 0xba, 0x99, 0x6c,
+	0x76, 0x6a, 0x0c, 0x1e, 0xef, 0x30, 0xff, 0xb7, 0x46, 0x72, 0xe9, 0xa5, 0xb7, 0xa3, 0xf8, 0xb3,
+	0x21, 0x77, 0x7a, 0x80, 0x78, 0x63, 0x4d, 0xe1, 0x78, 0x04, 0x77, 0x03, 0x33, 0x54, 0x3f, 0x52,
+	0x20, 0x61, 0x10, 0x87, 0xa5, 0x86, 0xe7, 0x23, 0xcb, 0x0e, 0xe9, 0xec, 0xa8, 0xf7, 0x49, 0x5b,
+	0x3c, 0x5f, 0x91, 0x5e, 0x3c, 0x47, 0xbb, 0x1b, 0xff, 0x09, 0x5e, 0xfe, 0x02, 0x00, 0x00, 0xff,
+	0xff, 0xde, 0x3a, 0x3f, 0x14, 0x12, 0x02, 0x00, 0x00,
 }

@@ -3,7 +3,7 @@ syntax = "proto3";
 package auth;
 
 service AuthenticationService {
-  rpc RequestCredential (NewCredentialRequest) returns (stream NewCredentialResponse) {}
+  rpc RequestUserCredential (UserCredentialRequest) returns (stream CredentialResponse) {}
 }
 
 message SshCertificateRequest {
@@ -14,7 +14,7 @@ message SshCertificate {
   string certificate = 1;
 }
 
-message NewCredentialRequest {
+message UserCredentialRequest {
   // Request for a short-lived SSH certificate
   SshCertificateRequest ssh_certificate_request = 1;
 }
@@ -24,7 +24,7 @@ message UserAction {
   string url = 1;
 }
 
-message NewCredentialResponse {
+message CredentialResponse {
   // If set, the user needs to do something
   UserAction required_action = 1;
 
