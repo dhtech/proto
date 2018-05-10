@@ -14,9 +14,20 @@ message SshCertificate {
   string certificate = 1;
 }
 
+message ClientValidation {
+  // To make it harder to simply send a URL to another user and lure them into
+  // logging in with the goal of stealing their session, we do a validation
+  // by querying localhost:1215. If we get back the value presented in this
+  // field the request is considered to be genuine.
+  string ident = 1;
+}
+
 message UserCredentialRequest {
+  // Identification to verify on the requester
+  ClientValidation client_validation = 1;
+
   // Request for a short-lived SSH certificate
-  SshCertificateRequest ssh_certificate_request = 1;
+  SshCertificateRequest ssh_certificate_request = 2;
 }
 
 message UserAction {

@@ -12,6 +12,12 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
 // Passed inside the authserver when the user completes a challenge
 type WebChallengeResponse struct {
 	// The challenge ID
@@ -19,14 +25,36 @@ type WebChallengeResponse struct {
 	// User responded to the challenge as this user
 	User string `protobuf:"bytes,2,opt,name=user" json:"user,omitempty"`
 	// Source of the user
-	Ip   string `protobuf:"bytes,3,opt,name=ip" json:"ip,omitempty"`
-	Port uint32 `protobuf:"varint,4,opt,name=port" json:"port,omitempty"`
+	Ip                   string   `protobuf:"bytes,3,opt,name=ip" json:"ip,omitempty"`
+	Port                 uint32   `protobuf:"varint,4,opt,name=port" json:"port,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *WebChallengeResponse) Reset()                    { *m = WebChallengeResponse{} }
-func (m *WebChallengeResponse) String() string            { return proto.CompactTextString(m) }
-func (*WebChallengeResponse) ProtoMessage()               {}
-func (*WebChallengeResponse) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
+func (m *WebChallengeResponse) Reset()         { *m = WebChallengeResponse{} }
+func (m *WebChallengeResponse) String() string { return proto.CompactTextString(m) }
+func (*WebChallengeResponse) ProtoMessage()    {}
+func (*WebChallengeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_internal_3dd4ae1dabeaaf48, []int{0}
+}
+func (m *WebChallengeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_WebChallengeResponse.Unmarshal(m, b)
+}
+func (m *WebChallengeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_WebChallengeResponse.Marshal(b, m, deterministic)
+}
+func (dst *WebChallengeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_WebChallengeResponse.Merge(dst, src)
+}
+func (m *WebChallengeResponse) XXX_Size() int {
+	return xxx_messageInfo_WebChallengeResponse.Size(m)
+}
+func (m *WebChallengeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_WebChallengeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_WebChallengeResponse proto.InternalMessageInfo
 
 func (m *WebChallengeResponse) GetChallenge() string {
 	if m != nil {
@@ -60,9 +88,9 @@ func init() {
 	proto.RegisterType((*WebChallengeResponse)(nil), "auth.WebChallengeResponse")
 }
 
-func init() { proto.RegisterFile("internal.proto", fileDescriptor1) }
+func init() { proto.RegisterFile("internal.proto", fileDescriptor_internal_3dd4ae1dabeaaf48) }
 
-var fileDescriptor1 = []byte{
+var fileDescriptor_internal_3dd4ae1dabeaaf48 = []byte{
 	// 132 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0xcc, 0x2b, 0x49,
 	0x2d, 0xca, 0x4b, 0xcc, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x49, 0x2c, 0x2d, 0xc9,
