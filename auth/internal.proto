@@ -11,4 +11,6 @@ message VerifiedUser {
   string port = 3;
 
   repeated string group = 4;
+
+  string reverse_dns = 5;
 }
