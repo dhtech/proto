@@ -2,15 +2,13 @@ syntax = "proto3";
 
 package auth;
 
-// Passed inside the authserver when the user completes a challenge
-message WebChallengeResponse {
-  // The challenge ID
-  string challenge = 1;
+// Contains all facts known about the verified user
+message VerifiedUser {
+  string username = 1;
 
-  // User responded to the challenge as this user
-  string user = 2;
+  string ip = 2;
 
-  // Source of the user
-  string ip = 3;
-  uint32 port = 4;
+  string port = 3;
+
+  repeated string group = 4;
 }

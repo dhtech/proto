@@ -18,87 +18,83 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-// Passed inside the authserver when the user completes a challenge
-type WebChallengeResponse struct {
-	// The challenge ID
-	Challenge string `protobuf:"bytes,1,opt,name=challenge" json:"challenge,omitempty"`
-	// User responded to the challenge as this user
-	User string `protobuf:"bytes,2,opt,name=user" json:"user,omitempty"`
-	// Source of the user
-	Ip                   string   `protobuf:"bytes,3,opt,name=ip" json:"ip,omitempty"`
-	Port                 uint32   `protobuf:"varint,4,opt,name=port" json:"port,omitempty"`
+// Contains all facts known about the verified user
+type VerifiedUser struct {
+	User                 string   `protobuf:"bytes,1,opt,name=user" json:"user,omitempty"`
+	Ip                   string   `protobuf:"bytes,2,opt,name=ip" json:"ip,omitempty"`
+	Port                 string   `protobuf:"bytes,3,opt,name=port" json:"port,omitempty"`
+	Group                []string `protobuf:"bytes,4,rep,name=group" json:"group,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *WebChallengeResponse) Reset()         { *m = WebChallengeResponse{} }
-func (m *WebChallengeResponse) String() string { return proto.CompactTextString(m) }
-func (*WebChallengeResponse) ProtoMessage()    {}
-func (*WebChallengeResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_internal_3dd4ae1dabeaaf48, []int{0}
+func (m *VerifiedUser) Reset()         { *m = VerifiedUser{} }
+func (m *VerifiedUser) String() string { return proto.CompactTextString(m) }
+func (*VerifiedUser) ProtoMessage()    {}
+func (*VerifiedUser) Descriptor() ([]byte, []int) {
+	return fileDescriptor_internal_0267643da344f5d6, []int{0}
 }
-func (m *WebChallengeResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_WebChallengeResponse.Unmarshal(m, b)
+func (m *VerifiedUser) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VerifiedUser.Unmarshal(m, b)
 }
-func (m *WebChallengeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_WebChallengeResponse.Marshal(b, m, deterministic)
+func (m *VerifiedUser) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VerifiedUser.Marshal(b, m, deterministic)
 }
-func (dst *WebChallengeResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_WebChallengeResponse.Merge(dst, src)
+func (dst *VerifiedUser) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VerifiedUser.Merge(dst, src)
 }
-func (m *WebChallengeResponse) XXX_Size() int {
-	return xxx_messageInfo_WebChallengeResponse.Size(m)
+func (m *VerifiedUser) XXX_Size() int {
+	return xxx_messageInfo_VerifiedUser.Size(m)
 }
-func (m *WebChallengeResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_WebChallengeResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_WebChallengeResponse proto.InternalMessageInfo
-
-func (m *WebChallengeResponse) GetChallenge() string {
-	if m != nil {
-		return m.Challenge
-	}
-	return ""
+func (m *VerifiedUser) XXX_DiscardUnknown() {
+	xxx_messageInfo_VerifiedUser.DiscardUnknown(m)
 }
 
-func (m *WebChallengeResponse) GetUser() string {
+var xxx_messageInfo_VerifiedUser proto.InternalMessageInfo
+
+func (m *VerifiedUser) GetUser() string {
 	if m != nil {
 		return m.User
 	}
 	return ""
 }
 
-func (m *WebChallengeResponse) GetIp() string {
+func (m *VerifiedUser) GetIp() string {
 	if m != nil {
 		return m.Ip
 	}
 	return ""
 }
 
-func (m *WebChallengeResponse) GetPort() uint32 {
+func (m *VerifiedUser) GetPort() string {
 	if m != nil {
 		return m.Port
 	}
-	return 0
+	return ""
+}
+
+func (m *VerifiedUser) GetGroup() []string {
+	if m != nil {
+		return m.Group
+	}
+	return nil
 }
 
 func init() {
-	proto.RegisterType((*WebChallengeResponse)(nil), "auth.WebChallengeResponse")
+	proto.RegisterType((*VerifiedUser)(nil), "auth.VerifiedUser")
 }
 
-func init() { proto.RegisterFile("internal.proto", fileDescriptor_internal_3dd4ae1dabeaaf48) }
+func init() { proto.RegisterFile("internal.proto", fileDescriptor_internal_0267643da344f5d6) }
 
-var fileDescriptor_internal_3dd4ae1dabeaaf48 = []byte{
-	// 132 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_internal_0267643da344f5d6 = []byte{
+	// 126 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xcb, 0xcc, 0x2b, 0x49,
 	0x2d, 0xca, 0x4b, 0xcc, 0xd1, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x49, 0x2c, 0x2d, 0xc9,
-	0x50, 0xca, 0xe1, 0x12, 0x09, 0x4f, 0x4d, 0x72, 0xce, 0x48, 0xcc, 0xc9, 0x49, 0xcd, 0x4b, 0x4f,
-	0x0d, 0x4a, 0x2d, 0x2e, 0xc8, 0xcf, 0x2b, 0x4e, 0x15, 0x92, 0xe1, 0xe2, 0x4c, 0x86, 0x09, 0x4a,
-	0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06, 0x21, 0x04, 0x84, 0x84, 0xb8, 0x58, 0x4a, 0x8b, 0x53, 0x8b,
-	0x24, 0x98, 0xc0, 0x12, 0x60, 0xb6, 0x10, 0x1f, 0x17, 0x53, 0x66, 0x81, 0x04, 0x33, 0x58, 0x84,
-	0x29, 0xb3, 0x00, 0xa4, 0xa6, 0x20, 0xbf, 0xa8, 0x44, 0x82, 0x45, 0x81, 0x51, 0x83, 0x37, 0x08,
-	0xcc, 0x4e, 0x62, 0x03, 0x5b, 0x6d, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x10, 0xf2, 0x39, 0xa4,
-	0x8c, 0x00, 0x00, 0x00,
+	0x50, 0x8a, 0xe1, 0xe2, 0x09, 0x4b, 0x2d, 0xca, 0x4c, 0xcb, 0x4c, 0x4d, 0x09, 0x2d, 0x4e, 0x2d,
+	0x12, 0x12, 0xe2, 0x62, 0x29, 0x2d, 0x4e, 0x2d, 0x92, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x02,
+	0xb3, 0x85, 0xf8, 0xb8, 0x98, 0x32, 0x0b, 0x24, 0x98, 0xc0, 0x22, 0x4c, 0x99, 0x05, 0x20, 0x35,
+	0x05, 0xf9, 0x45, 0x25, 0x12, 0xcc, 0x10, 0x35, 0x20, 0xb6, 0x90, 0x08, 0x17, 0x6b, 0x7a, 0x51,
+	0x7e, 0x69, 0x81, 0x04, 0x8b, 0x02, 0xb3, 0x06, 0x67, 0x10, 0x84, 0x93, 0xc4, 0x06, 0xb6, 0xca,
+	0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x13, 0xf9, 0x10, 0x97, 0x7c, 0x00, 0x00, 0x00,
 }
