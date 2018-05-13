@@ -22,12 +22,20 @@ message ClientValidation {
   string ident = 1;
 }
 
+message VaultTokenRequest {
+
+}
+
+message VaultToken {
+  string token = 1;
+}
+
 message UserCredentialRequest {
-  // Identification to verify on the requester
   ClientValidation client_validation = 1;
 
-  // Request for a short-lived SSH certificate
   SshCertificateRequest ssh_certificate_request = 2;
+
+  VaultTokenRequest vault_token_request = 3;
 }
 
 message UserAction {
@@ -40,4 +48,6 @@ message CredentialResponse {
   UserAction required_action = 1;
 
   SshCertificate ssh_certificate = 2;
+
+  VaultToken vault_token = 3;
 }
