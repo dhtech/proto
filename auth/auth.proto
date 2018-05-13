@@ -30,12 +30,25 @@ message VaultToken {
   string token = 1;
 }
 
+message KubernetesCertificateRequest {
+  // TODO(bluecmd): Unused due to https://github.com/hashicorp/vault/issues/4562
+  string csr = 1;
+}
+
+message KubernetesCertificate {
+  string certificate = 1;
+  // TODO(bluecmd): Remove when https://github.com/hashicorp/vault/issues/4562 is fixed
+  string private_key = 2;
+}
+
 message UserCredentialRequest {
   ClientValidation client_validation = 1;
 
   SshCertificateRequest ssh_certificate_request = 2;
 
   VaultTokenRequest vault_token_request = 3;
+
+  KubernetesCertificateRequest kubernetes_certificate_request = 4;
 }
 
 message UserAction {
@@ -50,4 +63,6 @@ message CredentialResponse {
   SshCertificate ssh_certificate = 2;
 
   VaultToken vault_token = 3;
+
+  KubernetesCertificate kubernetes_certificate = 4;
 }
