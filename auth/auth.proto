@@ -44,6 +44,12 @@ message KubernetesCertificate {
 message BrowserCookieRequest {
 }
 
+message BrowserCookie {
+  // This is also set in the browser when the flow is completed if the user
+  // was challenged.
+  string cookie = 1;
+}
+
 message UserCredentialRequest {
   ClientValidation client_validation = 1;
 
@@ -70,4 +76,6 @@ message CredentialResponse {
   VaultToken vault_token = 3;
 
   KubernetesCertificate kubernetes_certificate = 4;
+
+  BrowserCookie browser_cookie = 5;
 }
