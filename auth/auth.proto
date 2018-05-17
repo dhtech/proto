@@ -47,7 +47,16 @@ message BrowserCookieRequest {
 message BrowserCookie {
   // This is also set in the browser when the flow is completed if the user
   // was challenged.
-  string cookie = 1;
+
+  string name = 1;
+
+  string value = 2;
+
+  // DNS domain (with wildcard) that the cookie applies to
+  string domain = 3;
+
+  // Epoch timestamp in seconds
+  uint64 expires = 4;
 }
 
 message UserCredentialRequest {
