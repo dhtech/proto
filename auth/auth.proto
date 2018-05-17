@@ -41,6 +41,9 @@ message KubernetesCertificate {
   string private_key = 2;
 }
 
+message BrowserCookieRequest {
+}
+
 message UserCredentialRequest {
   ClientValidation client_validation = 1;
 
@@ -49,6 +52,8 @@ message UserCredentialRequest {
   VaultTokenRequest vault_token_request = 3;
 
   KubernetesCertificateRequest kubernetes_certificate_request = 4;
+
+  BrowserCookieRequest browser_cookie_request = 5;
 }
 
 message UserAction {
