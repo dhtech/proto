@@ -34,7 +34,7 @@ func (m *SshCertificateRequest) Reset()         { *m = SshCertificateRequest{} }
 func (m *SshCertificateRequest) String() string { return proto.CompactTextString(m) }
 func (*SshCertificateRequest) ProtoMessage()    {}
 func (*SshCertificateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{0}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{0}
 }
 func (m *SshCertificateRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SshCertificateRequest.Unmarshal(m, b)
@@ -72,7 +72,7 @@ func (m *SshCertificate) Reset()         { *m = SshCertificate{} }
 func (m *SshCertificate) String() string { return proto.CompactTextString(m) }
 func (*SshCertificate) ProtoMessage()    {}
 func (*SshCertificate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{1}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{1}
 }
 func (m *SshCertificate) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SshCertificate.Unmarshal(m, b)
@@ -114,7 +114,7 @@ func (m *ClientValidation) Reset()         { *m = ClientValidation{} }
 func (m *ClientValidation) String() string { return proto.CompactTextString(m) }
 func (*ClientValidation) ProtoMessage()    {}
 func (*ClientValidation) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{2}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{2}
 }
 func (m *ClientValidation) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ClientValidation.Unmarshal(m, b)
@@ -151,7 +151,7 @@ func (m *VaultTokenRequest) Reset()         { *m = VaultTokenRequest{} }
 func (m *VaultTokenRequest) String() string { return proto.CompactTextString(m) }
 func (*VaultTokenRequest) ProtoMessage()    {}
 func (*VaultTokenRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{3}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{3}
 }
 func (m *VaultTokenRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VaultTokenRequest.Unmarshal(m, b)
@@ -171,6 +171,7 @@ func (m *VaultTokenRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_VaultTokenRequest proto.InternalMessageInfo
 
+// Short lived Vault token
 type VaultToken struct {
 	Token                string   `protobuf:"bytes,1,opt,name=token" json:"token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -182,7 +183,7 @@ func (m *VaultToken) Reset()         { *m = VaultToken{} }
 func (m *VaultToken) String() string { return proto.CompactTextString(m) }
 func (*VaultToken) ProtoMessage()    {}
 func (*VaultToken) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{4}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{4}
 }
 func (m *VaultToken) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VaultToken.Unmarshal(m, b)
@@ -209,6 +210,162 @@ func (m *VaultToken) GetToken() string {
 	return ""
 }
 
+// Short lived X.509 certificate with VMware attributes added
+type VmwareCertificateRequest struct {
+	Csr                  string   `protobuf:"bytes,1,opt,name=csr" json:"csr,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VmwareCertificateRequest) Reset()         { *m = VmwareCertificateRequest{} }
+func (m *VmwareCertificateRequest) String() string { return proto.CompactTextString(m) }
+func (*VmwareCertificateRequest) ProtoMessage()    {}
+func (*VmwareCertificateRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{5}
+}
+func (m *VmwareCertificateRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VmwareCertificateRequest.Unmarshal(m, b)
+}
+func (m *VmwareCertificateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VmwareCertificateRequest.Marshal(b, m, deterministic)
+}
+func (dst *VmwareCertificateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VmwareCertificateRequest.Merge(dst, src)
+}
+func (m *VmwareCertificateRequest) XXX_Size() int {
+	return xxx_messageInfo_VmwareCertificateRequest.Size(m)
+}
+func (m *VmwareCertificateRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_VmwareCertificateRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VmwareCertificateRequest proto.InternalMessageInfo
+
+func (m *VmwareCertificateRequest) GetCsr() string {
+	if m != nil {
+		return m.Csr
+	}
+	return ""
+}
+
+type VmwareCertificate struct {
+	Certificate          string   `protobuf:"bytes,1,opt,name=certificate" json:"certificate,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *VmwareCertificate) Reset()         { *m = VmwareCertificate{} }
+func (m *VmwareCertificate) String() string { return proto.CompactTextString(m) }
+func (*VmwareCertificate) ProtoMessage()    {}
+func (*VmwareCertificate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{6}
+}
+func (m *VmwareCertificate) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_VmwareCertificate.Unmarshal(m, b)
+}
+func (m *VmwareCertificate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_VmwareCertificate.Marshal(b, m, deterministic)
+}
+func (dst *VmwareCertificate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_VmwareCertificate.Merge(dst, src)
+}
+func (m *VmwareCertificate) XXX_Size() int {
+	return xxx_messageInfo_VmwareCertificate.Size(m)
+}
+func (m *VmwareCertificate) XXX_DiscardUnknown() {
+	xxx_messageInfo_VmwareCertificate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_VmwareCertificate proto.InternalMessageInfo
+
+func (m *VmwareCertificate) GetCertificate() string {
+	if m != nil {
+		return m.Certificate
+	}
+	return ""
+}
+
+// Long lived X.509 certificate to be used together with the cookie.
+// Long lived since browsers are quite annoying when a new cert is installed.
+type BrowserCertificateRequest struct {
+	Csr                  string   `protobuf:"bytes,1,opt,name=csr" json:"csr,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *BrowserCertificateRequest) Reset()         { *m = BrowserCertificateRequest{} }
+func (m *BrowserCertificateRequest) String() string { return proto.CompactTextString(m) }
+func (*BrowserCertificateRequest) ProtoMessage()    {}
+func (*BrowserCertificateRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{7}
+}
+func (m *BrowserCertificateRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_BrowserCertificateRequest.Unmarshal(m, b)
+}
+func (m *BrowserCertificateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_BrowserCertificateRequest.Marshal(b, m, deterministic)
+}
+func (dst *BrowserCertificateRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BrowserCertificateRequest.Merge(dst, src)
+}
+func (m *BrowserCertificateRequest) XXX_Size() int {
+	return xxx_messageInfo_BrowserCertificateRequest.Size(m)
+}
+func (m *BrowserCertificateRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_BrowserCertificateRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BrowserCertificateRequest proto.InternalMessageInfo
+
+func (m *BrowserCertificateRequest) GetCsr() string {
+	if m != nil {
+		return m.Csr
+	}
+	return ""
+}
+
+type BrowserCertificate struct {
+	Certificate          string   `protobuf:"bytes,1,opt,name=certificate" json:"certificate,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *BrowserCertificate) Reset()         { *m = BrowserCertificate{} }
+func (m *BrowserCertificate) String() string { return proto.CompactTextString(m) }
+func (*BrowserCertificate) ProtoMessage()    {}
+func (*BrowserCertificate) Descriptor() ([]byte, []int) {
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{8}
+}
+func (m *BrowserCertificate) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_BrowserCertificate.Unmarshal(m, b)
+}
+func (m *BrowserCertificate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_BrowserCertificate.Marshal(b, m, deterministic)
+}
+func (dst *BrowserCertificate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BrowserCertificate.Merge(dst, src)
+}
+func (m *BrowserCertificate) XXX_Size() int {
+	return xxx_messageInfo_BrowserCertificate.Size(m)
+}
+func (m *BrowserCertificate) XXX_DiscardUnknown() {
+	xxx_messageInfo_BrowserCertificate.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BrowserCertificate proto.InternalMessageInfo
+
+func (m *BrowserCertificate) GetCertificate() string {
+	if m != nil {
+		return m.Certificate
+	}
+	return ""
+}
+
+// Short lived X.509 certificate with Kubernetes attributes
 type KubernetesCertificateRequest struct {
 	// TODO(bluecmd): Unused due to https://github.com/hashicorp/vault/issues/4562
 	Csr                  string   `protobuf:"bytes,1,opt,name=csr" json:"csr,omitempty"`
@@ -221,7 +378,7 @@ func (m *KubernetesCertificateRequest) Reset()         { *m = KubernetesCertific
 func (m *KubernetesCertificateRequest) String() string { return proto.CompactTextString(m) }
 func (*KubernetesCertificateRequest) ProtoMessage()    {}
 func (*KubernetesCertificateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{5}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{9}
 }
 func (m *KubernetesCertificateRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_KubernetesCertificateRequest.Unmarshal(m, b)
@@ -261,7 +418,7 @@ func (m *KubernetesCertificate) Reset()         { *m = KubernetesCertificate{} }
 func (m *KubernetesCertificate) String() string { return proto.CompactTextString(m) }
 func (*KubernetesCertificate) ProtoMessage()    {}
 func (*KubernetesCertificate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{6}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{10}
 }
 func (m *KubernetesCertificate) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_KubernetesCertificate.Unmarshal(m, b)
@@ -295,6 +452,9 @@ func (m *KubernetesCertificate) GetPrivateKey() string {
 	return ""
 }
 
+// Short lived browser cookie for authentication together with the
+// BrowserCertificate. Cookie is already set by the backend in the browser if a
+// user action was triggered.
 type BrowserCookieRequest struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -305,7 +465,7 @@ func (m *BrowserCookieRequest) Reset()         { *m = BrowserCookieRequest{} }
 func (m *BrowserCookieRequest) String() string { return proto.CompactTextString(m) }
 func (*BrowserCookieRequest) ProtoMessage()    {}
 func (*BrowserCookieRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{7}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{11}
 }
 func (m *BrowserCookieRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BrowserCookieRequest.Unmarshal(m, b)
@@ -341,7 +501,7 @@ func (m *BrowserCookie) Reset()         { *m = BrowserCookie{} }
 func (m *BrowserCookie) String() string { return proto.CompactTextString(m) }
 func (*BrowserCookie) ProtoMessage()    {}
 func (*BrowserCookie) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{8}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{12}
 }
 func (m *BrowserCookie) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BrowserCookie.Unmarshal(m, b)
@@ -395,6 +555,8 @@ type UserCredentialRequest struct {
 	VaultTokenRequest            *VaultTokenRequest            `protobuf:"bytes,3,opt,name=vault_token_request,json=vaultTokenRequest" json:"vault_token_request,omitempty"`
 	KubernetesCertificateRequest *KubernetesCertificateRequest `protobuf:"bytes,4,opt,name=kubernetes_certificate_request,json=kubernetesCertificateRequest" json:"kubernetes_certificate_request,omitempty"`
 	BrowserCookieRequest         *BrowserCookieRequest         `protobuf:"bytes,5,opt,name=browser_cookie_request,json=browserCookieRequest" json:"browser_cookie_request,omitempty"`
+	BrowserCertificateRequest    *BrowserCertificateRequest    `protobuf:"bytes,6,opt,name=browser_certificate_request,json=browserCertificateRequest" json:"browser_certificate_request,omitempty"`
+	VmwareCertificateRequest     *VmwareCertificateRequest     `protobuf:"bytes,7,opt,name=vmware_certificate_request,json=vmwareCertificateRequest" json:"vmware_certificate_request,omitempty"`
 	XXX_NoUnkeyedLiteral         struct{}                      `json:"-"`
 	XXX_unrecognized             []byte                        `json:"-"`
 	XXX_sizecache                int32                         `json:"-"`
@@ -404,7 +566,7 @@ func (m *UserCredentialRequest) Reset()         { *m = UserCredentialRequest{} }
 func (m *UserCredentialRequest) String() string { return proto.CompactTextString(m) }
 func (*UserCredentialRequest) ProtoMessage()    {}
 func (*UserCredentialRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{9}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{13}
 }
 func (m *UserCredentialRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserCredentialRequest.Unmarshal(m, b)
@@ -459,6 +621,20 @@ func (m *UserCredentialRequest) GetBrowserCookieRequest() *BrowserCookieRequest 
 	return nil
 }
 
+func (m *UserCredentialRequest) GetBrowserCertificateRequest() *BrowserCertificateRequest {
+	if m != nil {
+		return m.BrowserCertificateRequest
+	}
+	return nil
+}
+
+func (m *UserCredentialRequest) GetVmwareCertificateRequest() *VmwareCertificateRequest {
+	if m != nil {
+		return m.VmwareCertificateRequest
+	}
+	return nil
+}
+
 type UserAction struct {
 	// Interactive URL needs to be visited and acted on
 	Url                  string   `protobuf:"bytes,1,opt,name=url" json:"url,omitempty"`
@@ -471,7 +647,7 @@ func (m *UserAction) Reset()         { *m = UserAction{} }
 func (m *UserAction) String() string { return proto.CompactTextString(m) }
 func (*UserAction) ProtoMessage()    {}
 func (*UserAction) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{10}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{14}
 }
 func (m *UserAction) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserAction.Unmarshal(m, b)
@@ -505,6 +681,8 @@ type CredentialResponse struct {
 	VaultToken            *VaultToken            `protobuf:"bytes,3,opt,name=vault_token,json=vaultToken" json:"vault_token,omitempty"`
 	KubernetesCertificate *KubernetesCertificate `protobuf:"bytes,4,opt,name=kubernetes_certificate,json=kubernetesCertificate" json:"kubernetes_certificate,omitempty"`
 	BrowserCookie         *BrowserCookie         `protobuf:"bytes,5,opt,name=browser_cookie,json=browserCookie" json:"browser_cookie,omitempty"`
+	BrowserCertificate    *BrowserCertificate    `protobuf:"bytes,6,opt,name=browser_certificate,json=browserCertificate" json:"browser_certificate,omitempty"`
+	VmwareCertificate     *VmwareCertificate     `protobuf:"bytes,7,opt,name=vmware_certificate,json=vmwareCertificate" json:"vmware_certificate,omitempty"`
 	XXX_NoUnkeyedLiteral  struct{}               `json:"-"`
 	XXX_unrecognized      []byte                 `json:"-"`
 	XXX_sizecache         int32                  `json:"-"`
@@ -514,7 +692,7 @@ func (m *CredentialResponse) Reset()         { *m = CredentialResponse{} }
 func (m *CredentialResponse) String() string { return proto.CompactTextString(m) }
 func (*CredentialResponse) ProtoMessage()    {}
 func (*CredentialResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_auth_68dd789d9915ea47, []int{11}
+	return fileDescriptor_auth_94d9e93165a86e1f, []int{15}
 }
 func (m *CredentialResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CredentialResponse.Unmarshal(m, b)
@@ -569,12 +747,30 @@ func (m *CredentialResponse) GetBrowserCookie() *BrowserCookie {
 	return nil
 }
 
+func (m *CredentialResponse) GetBrowserCertificate() *BrowserCertificate {
+	if m != nil {
+		return m.BrowserCertificate
+	}
+	return nil
+}
+
+func (m *CredentialResponse) GetVmwareCertificate() *VmwareCertificate {
+	if m != nil {
+		return m.VmwareCertificate
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*SshCertificateRequest)(nil), "auth.SshCertificateRequest")
 	proto.RegisterType((*SshCertificate)(nil), "auth.SshCertificate")
 	proto.RegisterType((*ClientValidation)(nil), "auth.ClientValidation")
 	proto.RegisterType((*VaultTokenRequest)(nil), "auth.VaultTokenRequest")
 	proto.RegisterType((*VaultToken)(nil), "auth.VaultToken")
+	proto.RegisterType((*VmwareCertificateRequest)(nil), "auth.VmwareCertificateRequest")
+	proto.RegisterType((*VmwareCertificate)(nil), "auth.VmwareCertificate")
+	proto.RegisterType((*BrowserCertificateRequest)(nil), "auth.BrowserCertificateRequest")
+	proto.RegisterType((*BrowserCertificate)(nil), "auth.BrowserCertificate")
 	proto.RegisterType((*KubernetesCertificateRequest)(nil), "auth.KubernetesCertificateRequest")
 	proto.RegisterType((*KubernetesCertificate)(nil), "auth.KubernetesCertificate")
 	proto.RegisterType((*BrowserCookieRequest)(nil), "auth.BrowserCookieRequest")
@@ -683,45 +879,51 @@ var _AuthenticationService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "auth.proto",
 }
 
-func init() { proto.RegisterFile("auth.proto", fileDescriptor_auth_68dd789d9915ea47) }
+func init() { proto.RegisterFile("auth.proto", fileDescriptor_auth_94d9e93165a86e1f) }
 
-var fileDescriptor_auth_68dd789d9915ea47 = []byte{
-	// 577 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x94, 0xcf, 0x6f, 0xda, 0x30,
-	0x14, 0xc7, 0x47, 0xa1, 0x9d, 0xfa, 0x50, 0x69, 0x6a, 0x08, 0x45, 0xa5, 0xeb, 0x90, 0x4f, 0x9c,
-	0xaa, 0x8e, 0x49, 0x93, 0x36, 0x69, 0x87, 0x8e, 0xc3, 0x0e, 0xbd, 0x4c, 0x61, 0xeb, 0x61, 0x97,
-	0x28, 0x98, 0x37, 0x61, 0x25, 0x4d, 0x98, 0xed, 0x64, 0xeb, 0x3f, 0xb6, 0xff, 0x63, 0xff, 0xd1,
-	0x64, 0xc7, 0x01, 0x02, 0x16, 0xbb, 0xf9, 0x3d, 0xe5, 0xfd, 0xf0, 0xf7, 0xf3, 0x75, 0x00, 0xa2,
-	0x5c, 0x2d, 0x6f, 0x57, 0x22, 0x53, 0x19, 0x69, 0xe9, 0x33, 0x7d, 0x07, 0xfe, 0x4c, 0x2e, 0xa7,
-	0x28, 0x14, 0xff, 0xc1, 0x59, 0xa4, 0x30, 0xc0, 0x9f, 0x39, 0x4a, 0x45, 0x5e, 0x01, 0xac, 0xf2,
-	0x79, 0xc2, 0x59, 0x18, 0xe3, 0xf3, 0xa0, 0x31, 0x6a, 0x8c, 0x4f, 0x83, 0xd3, 0x32, 0xf3, 0x80,
-	0xcf, 0x74, 0x02, 0x9d, 0x7a, 0x1d, 0x19, 0x41, 0x9b, 0x6d, 0x42, 0x5b, 0xb1, 0x9d, 0xa2, 0x63,
-	0xf0, 0xa6, 0x09, 0xc7, 0x54, 0x3d, 0x46, 0x09, 0x5f, 0x44, 0x8a, 0x67, 0x29, 0xe9, 0xc1, 0x31,
-	0x5f, 0x60, 0xaa, 0xec, 0xf7, 0x65, 0x40, 0xbb, 0x70, 0xf1, 0x18, 0xe5, 0x89, 0xfa, 0x9a, 0xc5,
-	0x98, 0xda, 0x8d, 0x28, 0x05, 0xd8, 0x24, 0x75, 0xa1, 0xd2, 0x87, 0xaa, 0xd0, 0x04, 0xf4, 0x0e,
-	0xae, 0x1f, 0xf2, 0x39, 0x8a, 0x14, 0x15, 0x4a, 0xc7, 0xad, 0x3c, 0x68, 0x32, 0x29, 0x6c, 0x8d,
-	0x3e, 0xd2, 0xef, 0xe0, 0x3b, 0x2b, 0xfe, 0x7f, 0x1f, 0xf2, 0x1a, 0xda, 0x2b, 0xc1, 0x8b, 0x48,
-	0xa1, 0xd1, 0xe8, 0xc8, 0x7c, 0x01, 0x36, 0xa5, 0x45, 0xea, 0x43, 0xef, 0x93, 0xc8, 0x7e, 0x49,
-	0x14, 0xd3, 0x2c, 0x8b, 0x79, 0xb5, 0x05, 0x8d, 0xe1, 0xac, 0x96, 0x27, 0x04, 0x5a, 0x69, 0xf4,
-	0x54, 0x0d, 0x31, 0x67, 0x7d, 0xc1, 0x22, 0x4a, 0x72, 0xb4, 0x7d, 0xcb, 0x80, 0xf4, 0xe1, 0x64,
-	0x91, 0x3d, 0x45, 0x3c, 0x1d, 0x34, 0x4d, 0xda, 0x46, 0x64, 0x00, 0x2f, 0xf1, 0xf7, 0x8a, 0x0b,
-	0x94, 0x83, 0xd6, 0xa8, 0x31, 0x6e, 0x05, 0x55, 0x48, 0xff, 0x34, 0xc1, 0xff, 0xa6, 0x47, 0x09,
-	0xd4, 0xda, 0xf2, 0x28, 0xa9, 0xc4, 0x98, 0xc2, 0x05, 0x33, 0x3c, 0xc2, 0x62, 0x0d, 0xc4, 0xac,
-	0xd0, 0x9e, 0xf4, 0x6f, 0x8d, 0x53, 0x76, 0x71, 0x05, 0x1e, 0xdb, 0x05, 0x38, 0x83, 0x4b, 0x29,
-	0x97, 0xe1, 0x96, 0x2e, 0xa1, 0x28, 0xfb, 0x9b, 0xc5, 0xdb, 0x93, 0x61, 0xd9, 0xca, 0xe9, 0xb2,
-	0xc0, 0x97, 0x4e, 0xf3, 0x7d, 0x86, 0x6e, 0xa1, 0x51, 0x87, 0x86, 0xea, 0xba, 0x61, 0xd3, 0x34,
-	0xbc, 0x2c, 0x1b, 0xee, 0x19, 0x24, 0xb8, 0x28, 0x76, 0x53, 0x64, 0x09, 0x37, 0xf1, 0x9a, 0xae,
-	0x73, 0xc9, 0x96, 0xe9, 0x49, 0xcb, 0x9e, 0x87, 0xbc, 0x13, 0x5c, 0xc7, 0x87, 0x9c, 0xf5, 0x05,
-	0xfa, 0xf3, 0x92, 0x69, 0xc8, 0x0c, 0xd4, 0xf5, 0x84, 0x63, 0x33, 0xe1, 0xaa, 0x9c, 0xe0, 0xf2,
-	0x43, 0xd0, 0x9b, 0xbb, 0x5c, 0x72, 0x03, 0xa0, 0xb9, 0xdd, 0x33, 0xa3, 0xb3, 0x07, 0xcd, 0x5c,
-	0x24, 0x95, 0x73, 0x73, 0x91, 0xd0, 0xbf, 0x47, 0x40, 0xb6, 0xa1, 0xca, 0x55, 0x96, 0x4a, 0x24,
-	0xef, 0xe1, 0x5c, 0x4f, 0xe6, 0x02, 0x17, 0x61, 0xc4, 0xb6, 0x98, 0x7a, 0xe5, 0x06, 0x9b, 0x9e,
-	0x41, 0xa7, 0xfa, 0xd0, 0xce, 0xf8, 0x08, 0xe7, 0x3b, 0x2c, 0x2d, 0xc3, 0x9e, 0x93, 0x61, 0xa7,
-	0x0e, 0x8f, 0xbc, 0x81, 0xf6, 0x16, 0x35, 0x4b, 0xcb, 0xdb, 0xa3, 0x05, 0x1b, 0x4c, 0x24, 0x80,
-	0xbe, 0x9b, 0x8f, 0xe5, 0x32, 0x3c, 0xc4, 0xc5, 0x77, 0x02, 0x21, 0x1f, 0xa0, 0x53, 0x27, 0x61,
-	0x09, 0x74, 0x5d, 0x04, 0xce, 0x6a, 0xd2, 0x4f, 0x62, 0xf0, 0xef, 0x73, 0xb5, 0xd4, 0x92, 0x32,
-	0xe3, 0xef, 0x19, 0x8a, 0x82, 0x33, 0x24, 0x01, 0xf8, 0x96, 0x4b, 0xfd, 0x2d, 0x91, 0xe1, 0x46,
-	0xd5, 0xbd, 0x17, 0x76, 0x35, 0xb0, 0xcf, 0x68, 0x8f, 0x12, 0x7d, 0x71, 0xd7, 0x98, 0x9f, 0x98,
-	0x1f, 0xf1, 0xdb, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x06, 0xca, 0x3f, 0xed, 0x96, 0x05, 0x00,
-	0x00,
+var fileDescriptor_auth_94d9e93165a86e1f = []byte{
+	// 681 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x95, 0xc1, 0x6f, 0xd3, 0x3e,
+	0x14, 0xc7, 0x7f, 0xfd, 0xb5, 0xdb, 0xb4, 0x57, 0xad, 0x6b, 0xdd, 0xa6, 0xcb, 0xd6, 0xb1, 0x4d,
+	0x3e, 0xed, 0x00, 0xd3, 0x28, 0x62, 0x12, 0x48, 0x1c, 0xc6, 0x24, 0x10, 0xda, 0x05, 0x79, 0xb0,
+	0x03, 0x42, 0x8a, 0xdc, 0xd4, 0xa8, 0x56, 0xb2, 0xa4, 0x38, 0x4e, 0xc6, 0xfe, 0x5f, 0xfe, 0x05,
+	0xee, 0xc8, 0x8e, 0xd3, 0x36, 0x8d, 0x5b, 0x7a, 0xf3, 0x7b, 0x7d, 0xfe, 0x7e, 0x9f, 0xf3, 0x3e,
+	0x76, 0x01, 0x68, 0x2a, 0x27, 0x17, 0x53, 0x11, 0xcb, 0x18, 0x35, 0xd4, 0x1a, 0x5f, 0x81, 0x73,
+	0x97, 0x4c, 0x6e, 0x98, 0x90, 0xfc, 0x07, 0xf7, 0xa9, 0x64, 0x84, 0xfd, 0x4c, 0x59, 0x22, 0xd1,
+	0x33, 0x80, 0x69, 0x3a, 0x0a, 0xb9, 0xef, 0x05, 0xec, 0xc9, 0xad, 0x9d, 0xd5, 0xce, 0x77, 0xc9,
+	0x6e, 0x9e, 0xb9, 0x65, 0x4f, 0x78, 0x08, 0xad, 0xf2, 0x3e, 0x74, 0x06, 0x4d, 0x7f, 0x1e, 0x9a,
+	0x1d, 0x8b, 0x29, 0x7c, 0x0e, 0xed, 0x9b, 0x90, 0xb3, 0x48, 0xde, 0xd3, 0x90, 0x8f, 0xa9, 0xe4,
+	0x71, 0x84, 0x7a, 0xb0, 0xc5, 0xc7, 0x2c, 0x92, 0xa6, 0x3e, 0x0f, 0x70, 0x17, 0x3a, 0xf7, 0x34,
+	0x0d, 0xe5, 0x97, 0x38, 0x60, 0x91, 0xe9, 0x08, 0x63, 0x80, 0x79, 0x52, 0x6d, 0x94, 0x6a, 0x51,
+	0x6c, 0xd4, 0x01, 0x7e, 0x0e, 0xee, 0xfd, 0xc3, 0x23, 0x15, 0xcc, 0x72, 0xa2, 0x36, 0xd4, 0xfd,
+	0x44, 0x98, 0x7a, 0xb5, 0xc4, 0xaf, 0xa1, 0x53, 0xa9, 0xde, 0xe0, 0x1c, 0x2f, 0xe0, 0xf0, 0xbd,
+	0x88, 0x1f, 0x13, 0x26, 0x36, 0x72, 0xb9, 0x02, 0x54, 0x2d, 0xdf, 0xc0, 0xe6, 0x12, 0x8e, 0x6f,
+	0xd3, 0x11, 0x13, 0x11, 0x93, 0x2c, 0xd9, 0xc8, 0xe9, 0x1b, 0x38, 0xd6, 0x1d, 0xff, 0x36, 0x43,
+	0xa7, 0xd0, 0x9c, 0x0a, 0x9e, 0x51, 0xc9, 0xf4, 0xbc, 0xff, 0xd7, 0x15, 0x60, 0x52, 0x6a, 0xe0,
+	0x7d, 0xe8, 0x15, 0xa7, 0x88, 0xe3, 0x80, 0x17, 0x5d, 0xe0, 0x00, 0xf6, 0x4a, 0x79, 0x84, 0xa0,
+	0x11, 0xd1, 0x87, 0xc2, 0x44, 0xaf, 0xd5, 0xb0, 0x32, 0x1a, 0xa6, 0xcc, 0xe8, 0xe6, 0x01, 0xea,
+	0xc3, 0xf6, 0x38, 0x7e, 0xa0, 0x3c, 0x72, 0xeb, 0x3a, 0x6d, 0x22, 0xe4, 0xc2, 0x0e, 0xfb, 0x35,
+	0xe5, 0x82, 0x25, 0x6e, 0xe3, 0xac, 0x76, 0xde, 0x20, 0x45, 0x88, 0xff, 0x34, 0xc0, 0xf9, 0xaa,
+	0xac, 0x04, 0x53, 0x9c, 0x70, 0x1a, 0x16, 0x1f, 0xe3, 0x06, 0x3a, 0xbe, 0x66, 0xcb, 0xcb, 0x66,
+	0x70, 0xe9, 0x16, 0x9a, 0xc3, 0xfe, 0x85, 0xa6, 0x7e, 0x19, 0x3d, 0xd2, 0xf6, 0x97, 0x61, 0xbc,
+	0x83, 0x83, 0x24, 0x99, 0x78, 0x0b, 0xdf, 0xc5, 0x13, 0xb9, 0xbe, 0x6e, 0xbc, 0x39, 0x1c, 0xe4,
+	0x52, 0xd6, 0x1b, 0x43, 0x9c, 0xc4, 0x7a, 0x91, 0x3e, 0x42, 0x37, 0x53, 0xd8, 0x7a, 0x9a, 0xd0,
+	0x99, 0x60, 0x5d, 0x0b, 0x1e, 0xe4, 0x82, 0x15, 0xd8, 0x49, 0x27, 0x5b, 0x4e, 0xa1, 0x09, 0x9c,
+	0x04, 0xb3, 0xe9, 0x5a, 0x9b, 0x6c, 0x68, 0x4d, 0x9c, 0x6b, 0xae, 0x63, 0x87, 0x1c, 0x07, 0xeb,
+	0xc8, 0xfa, 0x0c, 0xfd, 0x51, 0x3e, 0x53, 0xcf, 0xd7, 0x43, 0x9d, 0x39, 0x6c, 0x69, 0x87, 0xa3,
+	0xdc, 0xc1, 0xc6, 0x03, 0xe9, 0x8d, 0x2c, 0x59, 0xe4, 0xc1, 0x60, 0xa6, 0x68, 0x69, 0x7c, 0x5b,
+	0xcb, 0x9e, 0x96, 0x65, 0xab, 0x5d, 0x1f, 0x8e, 0x56, 0x5e, 0xbb, 0xef, 0x70, 0x94, 0xe9, 0xab,
+	0x6c, 0xd5, 0xdf, 0xd1, 0xfa, 0x27, 0xe6, 0x63, 0xaf, 0x78, 0x20, 0x88, 0x9b, 0xad, 0xf8, 0x05,
+	0x9f, 0x00, 0x28, 0xec, 0xae, 0x7d, 0x8d, 0x49, 0x1b, 0xea, 0xa9, 0x08, 0x8b, 0x8b, 0x97, 0x8a,
+	0x10, 0xff, 0xae, 0x03, 0x5a, 0x64, 0x32, 0x99, 0xc6, 0x51, 0xc2, 0xd0, 0x1b, 0xd8, 0x57, 0x1d,
+	0x70, 0xc1, 0xc6, 0x1e, 0xf5, 0x17, 0x90, 0x6c, 0xe7, 0x9d, 0xcc, 0x35, 0x49, 0xab, 0x28, 0x34,
+	0x1e, 0xef, 0x60, 0x7f, 0x09, 0x45, 0x83, 0x60, 0xcf, 0x8a, 0x60, 0xab, 0xcc, 0x1e, 0x7a, 0x09,
+	0xcd, 0x05, 0xe8, 0x0c, 0x6c, 0xed, 0x0a, 0x6c, 0x30, 0xa7, 0x0c, 0x11, 0xe8, 0xdb, 0xf1, 0x32,
+	0x58, 0x0d, 0xd6, 0x61, 0xe5, 0x58, 0x79, 0x42, 0x6f, 0xa1, 0x55, 0x06, 0xc9, 0x00, 0xd4, 0xb5,
+	0x01, 0xb4, 0x57, 0x22, 0x07, 0x7d, 0x82, 0xae, 0x05, 0x19, 0x83, 0x8a, 0xbb, 0x12, 0x15, 0x54,
+	0x65, 0x04, 0x7d, 0x00, 0x54, 0x85, 0xc3, 0x40, 0x71, 0xb0, 0x0a, 0x8a, 0x4e, 0x85, 0x86, 0x61,
+	0x00, 0xce, 0x75, 0x2a, 0x27, 0x6a, 0xca, 0xbe, 0x7e, 0x31, 0xee, 0x98, 0xc8, 0xb8, 0xcf, 0x10,
+	0x01, 0xc7, 0xa0, 0x52, 0x7e, 0x9d, 0xd0, 0x60, 0x3e, 0xe8, 0xca, 0x9b, 0x75, 0x64, 0x0e, 0x51,
+	0x05, 0x07, 0xff, 0x77, 0x59, 0x1b, 0x6d, 0xeb, 0xbf, 0xe9, 0x57, 0x7f, 0x03, 0x00, 0x00, 0xff,
+	0xff, 0x1c, 0xc7, 0xc3, 0x88, 0xb4, 0x07, 0x00, 0x00,
 }

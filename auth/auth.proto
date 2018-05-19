@@ -26,10 +26,32 @@ message VaultTokenRequest {
 
 }
 
+// Short lived Vault token
 message VaultToken {
   string token = 1;
 }
 
+
+// Short lived X.509 certificate with VMware attributes added
+message VmwareCertificateRequest {
+  string csr = 1;
+}
+
+message VmwareCertificate {
+  string certificate = 1;
+}
+
+// Long lived X.509 certificate to be used together with the cookie.
+// Long lived since browsers are quite annoying when a new cert is installed.
+message BrowserCertificateRequest {
+  string csr = 1;
+}
+
+message BrowserCertificate {
+  string certificate = 1;
+}
+
+// Short lived X.509 certificate with Kubernetes attributes
 message KubernetesCertificateRequest {
   // TODO(bluecmd): Unused due to https://github.com/hashicorp/vault/issues/4562
   string csr = 1;
@@ -41,6 +63,9 @@ message KubernetesCertificate {
   string private_key = 2;
 }
 
+// Short lived browser cookie for authentication together with the
+// BrowserCertificate. Cookie is already set by the backend in the browser if a
+// user action was triggered.
 message BrowserCookieRequest {
 }
 
@@ -69,6 +94,10 @@ message UserCredentialRequest {
   KubernetesCertificateRequest kubernetes_certificate_request = 4;
 
   BrowserCookieRequest browser_cookie_request = 5;
+
+  BrowserCertificateRequest browser_certificate_request = 6;
+
+  VmwareCertificateRequest vmware_certificate_request = 7;
 }
 
 message UserAction {
@@ -87,4 +116,8 @@ message CredentialResponse {
   KubernetesCertificate kubernetes_certificate = 4;
 
   BrowserCookie browser_cookie = 5;
+
+  BrowserCertificate browser_certificate = 6;
+
+  VmwareCertificate vmware_certificate = 7;
 }
