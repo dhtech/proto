@@ -39,6 +39,7 @@ message VmwareCertificateRequest {
 
 message VmwareCertificate {
   string certificate = 1;
+  repeated string ca_chain = 2;
 }
 
 // Long lived X.509 certificate to be used together with the cookie.
@@ -49,6 +50,7 @@ message BrowserCertificateRequest {
 
 message BrowserCertificate {
   string certificate = 1;
+  repeated string ca_chain = 2;
 }
 
 // Short lived X.509 certificate with Kubernetes attributes
@@ -61,6 +63,7 @@ message KubernetesCertificate {
   string certificate = 1;
   // TODO(bluecmd): Remove when https://github.com/hashicorp/vault/issues/4562 is fixed
   string private_key = 2;
+  repeated string ca_chain = 3;
 }
 
 // Short lived browser cookie for authentication together with the
