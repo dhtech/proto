@@ -7,6 +7,8 @@ if [[ "$(uname)" == "Linux" ]]; then
   ./grpc_cli_linux -enable_ssl "$@"
 elif [[ "$(uname)" == "FreeBSD" ]]; then
   ./grpc_cli_freebsd -enable_ssl "$@"
+elif [[ "$(uname)" == "MINGW64_NT-10.0" ]]; then
+  ./grpc_cli.exe -enable_ssl "$@"
 else
   echo "Unknown OS $(uname)"
 fi
