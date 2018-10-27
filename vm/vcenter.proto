@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package vm;
+
+service VcenterService {
+  rpc CreateDvs (CreateRequest) returns (CreateResponse) {}
+  rpc CreateDvsPortgroup (CreateDvsPortgroupRequest) returns (CreateDvsPortgroupResponse) {}
+  rpc CreateCluster (ChangeNetworkRequest) returns (ChangeNetworkResponse) {}
+  rpc CreateDatacenter (ChangeNetworkRequest) returns (ChangeNetworkResponse) {}
+  rpc AddHostToCluster (ChangeNetworkRequest) returns (ChangeNetworkResponse) {}
+  rpc AddHostToDvs (ChangeNetworkRequest) returns (ChangeNetworkResponse) {}
+  rpc ListClusters (ListClustersRequest) returns (ListClustersResponse) {}
+  rpc ListHosts (ListHostsRequest) returns (ListHostsResponse() {}
+  rpc ListDvs (ListDvsRequest) returns (ListDvsResponse() {}
+  rpc ListDatacenters (ListDatacentersRequest) returns (ListDatacentersResponse() {}
+}
+
+message Location {
+  string datacenter = 1;
+  string cluster = 1;
+}
+
+message DvsPortgroup {
+  string name = 3;
+  oneof network {
+    uint32 vlan = 4;
+    bool trunk = 5;
+  }
+}
+
+
+message CreateDvsPortgroupRequest {
+  Location location = 1;
+  string dvs = 2;
+  DvsPortgroup portgroup = 3;
+}
+
+message CreateClusterRequest {
+  Location location = 1;
+}
+
+message CreateDatacenterRequest {
+  Location location = 1;
+}
+
+message CreateDvsRequest {
+  Location location = 1;
+  string dvs = 2;
+}
+
+message AddHostToClusterRequest {
+  Location location = 1;
+  // Credentials needs to be in vault
+  string host = 2;
+}
+
+message AddHostToDvsRequest {
+  Location location = 1;
+  string host = 2;
+  string dvs = 3;
+}
+
+message ListClustersResponse {
+  repeated Location location = 1;
+}
+
+message ListDatacentersResponse {
+  repeated Location location = 1;
+}
+
+message Host {
+  Location location = 1;
+  string host = 2;
+}
+
+message ListHostsResponse {
+  repeated Host host = 1;
+}
+
+message Dvs {
+  Location location = 1;
+  string dvs = 2;
+  repeated DvsPortgroup portgroup = 3;
+}
+
+message ListDvsResponse {
+  repeated Dvs dvs = 1;
+}

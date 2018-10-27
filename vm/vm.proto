@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package vm;
+
+service VirtualMachineService {
+  rpc Create (CreateRequest) returns (CreateResponse) {}
+  rpc ChangeNetwork (ChangeNetworkRequest) returns (ChangeNetworkResponse) {}
+  rpc PowerOn (PowerOnRequest) returns (PowerOnResponse) {}
+  rpc List (ListRequest) returns (ListResponse) {}
+}
+
+enum Os {
+  OS_DEBIAN,
+}
+
+message CreateRequest {
+  string name = 1;
+  Os os = 2;
+  uint32 cpus = 3;
+  uint32 disk = 4;
+  uint32 memory = 5;
+  repeated string network = 6;
+
+  VmwareParameters vmware = 7;
+}
+
+message VmwareParameters {
+  string datacenter = 1;
+  string datastore = 2;
+}
+
+message ChangeNetworkRequest {
+  string name = 1;
+  uint32 adapter = 2;
+  string network = 3;
+}
+
+message PowerOnRequest {
+  string name = 1;
+}
+
+message ListRequest {
+
+}
+
+message Vm {
+  string name = 1;
+  repeated string network = 2;
+  VmwareParamters vmware = 3;
+}
+
+message ListResponse {
+  repeated Vm vm = 1;
+}
