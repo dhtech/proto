@@ -5,6 +5,7 @@ package dns;
 service DynamicDnsService {
   rpc Insert (InsertRequest) returns (InsertResponse) {}
   rpc Remove (RemoveRequest) returns (RemoveResponse) {}
+  rpc GetZone (GetZoneRequest) returns (GetZoneResponse) {}
 }
 
 message Record {
@@ -32,4 +33,12 @@ message InsertResponse {
 }
 
 message RemoveResponse {
+}
+
+message GetZoneRequest {
+  string zone = 1;
+}
+
+message GetZoneResponse {
+  repeated Record record = 1;
 }
