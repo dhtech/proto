@@ -1,4 +1,4 @@
-all: dns.pb.go
+all: dns.pb.go enforcer.pb.go
 
-dns.pb.go: dns.proto
+%.pb.go: %.proto
 	protoc --go_out=plugins=grpc:. $?
