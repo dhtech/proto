@@ -14,6 +14,10 @@ message SshCertificate {
   string certificate = 1;
 }
 
+message SshCertificateTtl {
+  string certificate_ttl = 1;
+}
+
 message ClientValidation {
   // To make it harder to simply send a URL to another user and lure them into
   // logging in with the goal of stealing their session, we do a validation
@@ -101,6 +105,8 @@ message UserCredentialRequest {
   BrowserCertificateRequest browser_certificate_request = 6;
 
   VmwareCertificateRequest vmware_certificate_request = 7;
+
+  SshCertificateTtl ssh_certificate_ttl = 8;
 }
 
 message UserAction {
